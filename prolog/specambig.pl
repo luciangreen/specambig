@@ -17,7 +17,8 @@ fn(drop_first, L, R) :- ( L = [_|T] -> R = T ; R = [] ).
 fn(evens, L, R) :- include([X]>>(X mod 2 =:= 0), L, R).
 fn(inc, L, R) :- maplist([X, Y]>>(Y is X + 1), L, R).
 
-candidates(Spec, Cs) :- findall(F, ( fn(F, _, _), forall(member(I-O, Spec), fn(F, I, O)) ), C0), sort(C0, S), findall(F, ( member(F, [identity, reverse, msort, dedupe, drop_first, evens, inc]), memberchk(F, S) ), Cs).
+names([identity, reverse, msort, dedupe, drop_first, evens, inc]).
+candidates(Spec, Cs) :- names(Ns), findall(F, ( member(F, Ns), forall(member(I-O, Spec), fn(F, I, O)) ), Cs).
 
 inputs(I) :- between(0, 3, N), length(I, N), maplist([X]>>between(1, 3, X), I).
 
