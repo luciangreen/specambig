@@ -1,0 +1,402 @@
+specambig: 200 inputs and outputs, from real runs (io/ios.pl has the same as Prolog facts).
+
+1. ambiguous([[1]-[]])
+   => ask([2])
+2. candidates([[4,1]-[1,4],[5,2,4,1]-[1,2,4,5]])
+   => [msort,dedupe]
+3. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [2,2,2,1])
+   => [[1,2]-[dedupe],[1,2,2,2]-[msort,reverse],[2,2,1]-[drop_first],[2,2,2]-[evens],[2,2,2,1]-[identity],[3,3,3,2]-[inc]]
+4. ambiguous([[4,3]-[3,4],[]-[]])
+   => ask([1,1,2])
+5. candidates([[]-[],[2]-[]])
+   => [drop_first]
+6. split([drop_first], [1,1,3,3])
+   => [[1,3,3]-[drop_first]]
+7. ambiguous([[2,2,1,5]-[2,2,1,5]])
+   => clear(identity)
+8. candidates([[]-[],[3,2,1]-[1,2,3]])
+   => [reverse,msort,dedupe]
+9. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [3,4])
+   => [[3,4]-[dedupe,identity,msort],[4]-[drop_first,evens],[4,3]-[reverse],[4,5]-[inc]]
+10. ambiguous([[3,2,1,4]-[2,4],[2,5]-[2],[1,2]-[2]])
+   => clear(evens)
+11. candidates([[1,2]-[2,3],[1,5]-[2,6]])
+   => [inc]
+12. split([inc], [1])
+   => [[2]-[inc]]
+13. ambiguous([[5,1,1,1]-[5,1,1,1],[2,4]-[2,4],[]-[]])
+   => clear(identity)
+14. candidates([[]-[],[]-[],[]-[]])
+   => [identity,reverse,msort,dedupe,drop_first,evens,inc]
+15. split([msort,dedupe], [4,3,5])
+   => [[3,4,5]-[dedupe,msort]]
+16. ambiguous([[3,3]-[3,3],[5,3,5,2]-[2,5,3,5]])
+   => clear(reverse)
+17. candidates([[1,5]-[],[5,2]-[2]])
+   => [evens]
+18. split([msort], [])
+   => [[]-[msort]]
+19. ambiguous([[5,4,5]-[5,4,5],[5,5]-[5,5]])
+   => ask([1,2])
+20. candidates([[1,1,5]-[1,1,5]])
+   => [identity,msort]
+21. split([dedupe], [4,2,2])
+   => [[2,4]-[dedupe]]
+22. ambiguous([[1,2,4,2]-[2,4,2],[2,3]-[3],[1,5,2,3]-[5,2,3]])
+   => clear(drop_first)
+23. candidates([[4]-[4],[]-[]])
+   => [identity,reverse,msort,dedupe,evens]
+24. split([identity,reverse,msort], [1,1])
+   => [[1,1]-[identity,msort,reverse]]
+25. ambiguous([[4]-[4]])
+   => ask([1,1,2])
+26. candidates([[5]-[5],[4]-[4],[2,5,1]-[1,2,5]])
+   => [msort,dedupe]
+27. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [])
+   => [[]-[dedupe,drop_first,evens,identity,inc,msort,reverse]]
+28. ambiguous([[]-[],[5]-[],[3,3]-[3]])
+   => clear(drop_first)
+29. candidates([[4,2,5,5]-[5,3,6,6],[5,2]-[6,3]])
+   => [inc]
+30. split([identity], [3])
+   => [[3]-[identity]]
+31. ambiguous([[]-[]])
+   => ask([1,1,2])
+32. candidates([[4,1,5,4]-[5,2,6,5],[2]-[3]])
+   => [inc]
+33. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [1,3])
+   => [[]-[evens],[1,3]-[dedupe,identity,msort],[2,4]-[inc],[3]-[drop_first],[3,1]-[reverse]]
+34. ambiguous([[1,1]-[2,2],[3,4,4,2]-[4,5,5,3]])
+   => clear(inc)
+35. candidates([[4,1,2,1]-[1,2,1]])
+   => [drop_first]
+36. split([reverse,msort], [3,4])
+   => [[3,4]-[msort],[4,3]-[reverse]]
+37. ambiguous([[4]-[],[2,4,5,3]-[4,5,3],[2]-[]])
+   => clear(drop_first)
+38. candidates([[]-[],[2]-[3]])
+   => [inc]
+39. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [5])
+   => [[]-[drop_first,evens],[5]-[dedupe,identity,msort,reverse],[6]-[inc]]
+40. ambiguous([[]-[],[5,4,3]-[3,4,5],[3,1,1]-[1,3]])
+   => clear(dedupe)
+41. candidates([[2,2,1,3]-[1,2,2,3],[2,4,5,5]-[2,4,5,5]])
+   => [msort]
+42. split([inc], [4])
+   => [[5]-[inc]]
+43. ambiguous([[1]-[1],[]-[],[5,5]-[5,5]])
+   => ask([1,3,2])
+44. candidates([[2,2]-[3,3],[3]-[4],[1,3,4]-[2,4,5]])
+   => [inc]
+45. split([drop_first,evens], [2,5])
+   => [[2]-[evens],[5]-[drop_first]]
+46. ambiguous([[1]-[1],[2,5,2]-[2,2,5],[4,5]-[4,5]])
+   => clear(msort)
+47. candidates([[1,4]-[4,1],[3,2,3,4]-[4,3,2,3]])
+   => [reverse]
+48. split([reverse,msort,dedupe], [])
+   => [[]-[dedupe,msort,reverse]]
+49. ambiguous([[5,4]-[4,5],[]-[]])
+   => ask([1,1,2])
+50. candidates([[3,1]-[4,2],[1,5]-[2,6]])
+   => [inc]
+51. split([dedupe], [2,1,5,4])
+   => [[1,2,4,5]-[dedupe]]
+52. ambiguous([[1]-[1],[4,1,2]-[4,1,2],[4,2,1,3]-[4,2,1,3]])
+   => clear(identity)
+53. candidates([[4,3]-[4,3],[1,4]-[1,4],[2,4,2]-[2,4,2]])
+   => [identity]
+54. split([msort,dedupe], [])
+   => [[]-[dedupe,msort]]
+55. ambiguous([[5,1,5]-[1,5,5],[4,5,4]-[4,4,5],[1,5,3]-[1,3,5]])
+   => clear(msort)
+56. candidates([[3,1,2]-[1,2,3],[]-[]])
+   => [msort,dedupe]
+57. split([evens], [2,5,1])
+   => [[2]-[evens]]
+58. ambiguous([[4,4,2,3]-[5,5,3,4],[4,3,3,1]-[5,4,4,2],[2,2,4,3]-[3,3,5,4]])
+   => clear(inc)
+59. candidates([[]-[],[5]-[5],[3,4]-[3,4]])
+   => [identity,msort,dedupe]
+60. split([drop_first], [2,1])
+   => [[1]-[drop_first]]
+61. ambiguous([[2]-[3],[1]-[2],[4,3,1]-[5,4,2]])
+   => clear(inc)
+62. candidates([[]-[]])
+   => [identity,reverse,msort,dedupe,drop_first,evens,inc]
+63. split([msort,dedupe], [2,4])
+   => [[2,4]-[dedupe,msort]]
+64. ambiguous([[4,1]-[1],[]-[]])
+   => clear(drop_first)
+65. candidates([[5]-[5]])
+   => [identity,reverse,msort,dedupe]
+66. split([drop_first], [4,2,3,2])
+   => [[2,3,2]-[drop_first]]
+67. ambiguous([[]-[],[1,5]-[5,1],[5,5]-[5,5]])
+   => clear(reverse)
+68. candidates([[3,4]-[3,4],[5,2,2]-[5,2,2],[5,3]-[5,3]])
+   => [identity]
+69. split([identity], [3,1,2])
+   => [[3,1,2]-[identity]]
+70. ambiguous([[1,5,3,1]-[1,3,5],[4,2,4]-[2,4]])
+   => clear(dedupe)
+71. candidates([[5,4,2,4]-[4,2,4],[5,5]-[5],[4,2,5,1]-[2,5,1]])
+   => [drop_first]
+72. split([identity,msort,dedupe], [3])
+   => [[3]-[dedupe,identity,msort]]
+73. ambiguous([[1]-[1],[4,3,4,1]-[1,3,4]])
+   => clear(dedupe)
+74. candidates([[3,2]-[4,3],[5,5,3]-[6,6,4]])
+   => [inc]
+75. split([msort], [5,1])
+   => [[1,5]-[msort]]
+76. ambiguous([[2,1,5,4]-[1,2,4,5],[2]-[2]])
+   => ask([1,1])
+77. candidates([[4,1,1,4]-[1,1,4,4]])
+   => [msort]
+78. split([msort], [3,2])
+   => [[2,3]-[msort]]
+79. ambiguous([[5,2,3,4]-[2,3,4,5]])
+   => ask([1,1])
+80. candidates([[5,2,2,2]-[5,2,2,2]])
+   => [identity]
+81. split([identity,reverse,msort,evens], [2,3])
+   => [[2]-[evens],[2,3]-[identity,msort],[3,2]-[reverse]]
+82. ambiguous([[]-[]])
+   => ask([1,1,2])
+83. candidates([[1,5,3]-[1,5,3]])
+   => [identity]
+84. split([inc], [3,5,4,4])
+   => [[4,6,5,5]-[inc]]
+85. ambiguous([[2,1,2,3]-[1,2,3],[4,1,4,4]-[1,4,4],[2]-[]])
+   => clear(drop_first)
+86. candidates([[3,2]-[2],[5,5]-[],[3,1,2]-[2]])
+   => [evens]
+87. split([identity,reverse,msort,dedupe,evens], [])
+   => [[]-[dedupe,evens,identity,msort,reverse]]
+88. ambiguous([[2,1]-[1,2]])
+   => ask([1,1,2])
+89. candidates([[4,5]-[4,5],[]-[],[2]-[2]])
+   => [identity,msort,dedupe]
+90. split([reverse], [1,5,1,1])
+   => [[1,1,5,1]-[reverse]]
+91. ambiguous([[2]-[2],[1,5,5]-[1,5,5],[2]-[2]])
+   => ask([2,1])
+92. candidates([[5,3,3]-[3,3,5]])
+   => [reverse,msort]
+93. split([identity,msort,dedupe], [])
+   => [[]-[dedupe,identity,msort]]
+94. ambiguous([[1,4,1]-[1,4]])
+   => clear(dedupe)
+95. candidates([[4,5]-[4,5]])
+   => [identity,msort,dedupe]
+96. split([inc], [1,3])
+   => [[2,4]-[inc]]
+97. ambiguous([[1,1,5]-[1,5],[5,2]-[2],[3,1]-[1]])
+   => clear(drop_first)
+98. candidates([[5,1,5,4]-[4,5,1,5],[1,5]-[5,1]])
+   => [reverse]
+99. split([evens], [4,3,5])
+   => [[4]-[evens]]
+100. ambiguous([[4]-[4],[4,5,5,5]-[5,5,5,4],[]-[]])
+   => clear(reverse)
+101. candidates([[1,4,1,5]-[4,1,5]])
+   => [drop_first]
+102. split([identity,msort,dedupe], [2,5,4])
+   => [[2,4,5]-[dedupe,msort],[2,5,4]-[identity]]
+103. ambiguous([[]-[]])
+   => ask([1,1,2])
+104. candidates([[4,3,2,2]-[2,3,4],[]-[]])
+   => [dedupe]
+105. split([drop_first], [2,4])
+   => [[4]-[drop_first]]
+106. ambiguous([[1]-[],[1,3,1,4]-[3,1,4]])
+   => clear(drop_first)
+107. candidates([[3]-[3],[3,1,3]-[3,1,3],[4]-[4]])
+   => [identity,reverse]
+108. split([inc], [3,1,5])
+   => [[4,2,6]-[inc]]
+109. ambiguous([[1]-[],[4,5,5,4]-[4,4],[2,4,5,4]-[2,4,4]])
+   => clear(evens)
+110. candidates([[5]-[6],[3]-[4],[]-[]])
+   => [inc]
+111. split([reverse,msort], [1])
+   => [[1]-[msort,reverse]]
+112. ambiguous([[1,3,2]-[2],[]-[]])
+   => clear(evens)
+113. candidates([[2,5,5]-[5,5]])
+   => [drop_first]
+114. split([identity], [3,1,4])
+   => [[3,1,4]-[identity]]
+115. ambiguous([[3,5,4,5]-[3,4,5,5],[3]-[3]])
+   => clear(msort)
+116. candidates([[4]-[5],[5,5]-[6,6]])
+   => [inc]
+117. split([inc], [2,5,2])
+   => [[3,6,3]-[inc]]
+118. ambiguous([[4,5,2,3]-[2,3,4,5],[]-[],[2,4]-[2,4]])
+   => ask([1,1])
+119. candidates([[4,2,1,1]-[5,3,2,2],[]-[]])
+   => [inc]
+120. split([inc], [])
+   => [[]-[inc]]
+121. ambiguous([[1,2,3,1]-[1,1,2,3]])
+   => clear(msort)
+122. candidates([[4,5]-[5,4],[4,1,1,5]-[5,1,1,4],[3]-[3]])
+   => [reverse]
+123. split([inc], [3,1])
+   => [[4,2]-[inc]]
+124. ambiguous([[2,4]-[2,4],[]-[]])
+   => ask([1,2,1])
+125. candidates([[4]-[4],[4]-[4],[5,3,5]-[5,3,5]])
+   => [identity,reverse]
+126. split([identity], [1,5,4,1])
+   => [[1,5,4,1]-[identity]]
+127. ambiguous([[5,4,1]-[6,5,2],[]-[],[2,3,1]-[3,4,2]])
+   => clear(inc)
+128. candidates([[5,1,4]-[1,4],[]-[]])
+   => [drop_first]
+129. split([reverse], [5,5,4])
+   => [[4,5,5]-[reverse]]
+130. ambiguous([[2,4]-[2,4],[4]-[4]])
+   => ask([1,2,1])
+131. candidates([[]-[],[2,5,3]-[2,3,5],[3,3,5]-[3,3,5]])
+   => [msort]
+132. split([identity], [5,1,2,4])
+   => [[5,1,2,4]-[identity]]
+133. ambiguous([[2,3,3,1]-[3,4,4,2],[2,5]-[3,6]])
+   => clear(inc)
+134. candidates([[3]-[3],[5]-[5],[5,4]-[4,5]])
+   => [reverse,msort,dedupe]
+135. split([msort], [3,1,2,5])
+   => [[1,2,3,5]-[msort]]
+136. ambiguous([[4,2,2,3]-[3,2,2,4],[2,1,4,5]-[5,4,1,2]])
+   => clear(reverse)
+137. candidates([[1,1]-[1,1],[]-[]])
+   => [identity,reverse,msort]
+138. split([inc], [4,5])
+   => [[5,6]-[inc]]
+139. ambiguous([[2,3]-[2],[]-[],[4,4,3,3]-[4,4]])
+   => clear(evens)
+140. candidates([[1,4,2,4]-[4,2,4,1]])
+   => [reverse]
+141. split([identity,reverse], [4,3])
+   => [[3,4]-[reverse],[4,3]-[identity]]
+142. ambiguous([[1,5]-[5]])
+   => clear(drop_first)
+143. candidates([[1,5]-[1,5],[]-[]])
+   => [identity,msort,dedupe]
+144. split([evens], [4,1])
+   => [[4]-[evens]]
+145. ambiguous([[]-[]])
+   => ask([1,1,2])
+146. candidates([[2,4]-[4],[1,5,5,2]-[5,5,2]])
+   => [drop_first]
+147. split([msort], [5,1,4])
+   => [[1,4,5]-[msort]]
+148. ambiguous([[]-[],[5,5,2]-[2,5,5],[2]-[2]])
+   => ask([1,2])
+149. candidates([[1,1,5]-[5,1,1],[3,2,4,1]-[1,4,2,3],[1,1,4,2]-[2,4,1,1]])
+   => [reverse]
+150. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [2])
+   => [[]-[drop_first],[2]-[dedupe,evens,identity,msort,reverse],[3]-[inc]]
+151. ambiguous([[1]-[1]])
+   => ask([1,1,2])
+152. candidates([[]-[],[4,4,5,4]-[4,5,4],[5,4,2]-[4,2]])
+   => [drop_first]
+153. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [3,4,4])
+   => [[3,4]-[dedupe],[3,4,4]-[identity,msort],[4,4]-[drop_first,evens],[4,4,3]-[reverse],[4,5,5]-[inc]]
+154. ambiguous([[3]-[]])
+   => ask([2])
+155. candidates([[3,5,1]-[1,5,3],[3]-[3],[5,2,5]-[5,2,5]])
+   => [reverse]
+156. split([drop_first], [4])
+   => [[]-[drop_first]]
+157. ambiguous([[3]-[3]])
+   => ask([1,1,2])
+158. candidates([[1,5]-[]])
+   => [evens]
+159. split([dedupe,drop_first], [5])
+   => [[]-[drop_first],[5]-[dedupe]]
+160. ambiguous([[3,1]-[4,2],[]-[],[]-[]])
+   => clear(inc)
+161. candidates([[4,3]-[3],[4,1]-[1]])
+   => [drop_first]
+162. split([evens], [5,5,1,1])
+   => [[]-[evens]]
+163. ambiguous([[5]-[]])
+   => ask([2])
+164. candidates([[5,4,3,3]-[3,4,5],[2,5]-[2,5],[3]-[3]])
+   => [dedupe]
+165. split([identity,reverse,msort,evens], [4])
+   => [[4]-[evens,identity,msort,reverse]]
+166. ambiguous([[]-[],[5]-[5]])
+   => ask([1,1,2])
+167. candidates([[2,3]-[2,3],[1,2,3]-[1,2,3]])
+   => [identity,msort,dedupe]
+168. split([reverse,msort,dedupe], [])
+   => [[]-[dedupe,msort,reverse]]
+169. ambiguous([[2]-[2],[2,5]-[2]])
+   => clear(evens)
+170. candidates([[]-[],[1,5,1,2]-[5,1,2],[1]-[]])
+   => [drop_first]
+171. split([reverse,msort], [])
+   => [[]-[msort,reverse]]
+172. ambiguous([[]-[]])
+   => ask([1,1,2])
+173. candidates([[1,3,5,1]-[2,4,6,2],[1,1]-[2,2],[5,4,5,2]-[6,5,6,3]])
+   => [inc]
+174. split([drop_first], [3,5,1,2])
+   => [[5,1,2]-[drop_first]]
+175. ambiguous([[1,1]-[2,2],[4,1,3,4]-[5,2,4,5],[4,4,1,2]-[5,5,2,3]])
+   => clear(inc)
+176. candidates([[5]-[5],[]-[]])
+   => [identity,reverse,msort,dedupe]
+177. split([evens], [5])
+   => [[]-[evens]]
+178. ambiguous([[2,5,1]-[1,5,2],[4,5]-[5,4],[3]-[3]])
+   => clear(reverse)
+179. candidates([[4,4,4,4]-[5,5,5,5],[]-[],[5,3,5]-[6,4,6]])
+   => [inc]
+180. split([inc], [2,4,4])
+   => [[3,5,5]-[inc]]
+181. ambiguous([[2,2,1,2]-[3,3,2,3],[4,1,2,4]-[5,2,3,5]])
+   => clear(inc)
+182. candidates([[4]-[4],[1,2,4,1]-[1,1,2,4],[2,5,1,1]-[1,1,2,5]])
+   => [msort]
+183. split([identity,reverse,msort,dedupe,drop_first,evens,inc], [3])
+   => [[]-[drop_first,evens],[3]-[dedupe,identity,msort,reverse],[4]-[inc]]
+184. ambiguous([[]-[]])
+   => ask([1,1,2])
+185. candidates([[]-[],[4,5]-[4]])
+   => [evens]
+186. split([identity,msort], [1,2,1,4])
+   => [[1,1,2,4]-[msort],[1,2,1,4]-[identity]]
+187. ambiguous([[]-[]])
+   => ask([1,1,2])
+188. candidates([[4,3]-[3,4],[1,2,5,1]-[1,2,5],[1,1]-[1]])
+   => [dedupe]
+189. split([msort], [3,3])
+   => [[3,3]-[msort]]
+190. ambiguous([[]-[]])
+   => ask([1,1,2])
+191. candidates([[]-[]])
+   => [identity,reverse,msort,dedupe,drop_first,evens,inc]
+192. split([identity,reverse,msort,dedupe,evens], [1,5,2,4])
+   => [[1,2,4,5]-[dedupe,msort],[1,5,2,4]-[identity],[2,4]-[evens],[4,2,5,1]-[reverse]]
+193. ambiguous([[5,2,1]-[2,1],[2,1]-[1],[]-[]])
+   => clear(drop_first)
+194. candidates([[]-[]])
+   => [identity,reverse,msort,dedupe,drop_first,evens,inc]
+195. split([inc], [2,1])
+   => [[3,2]-[inc]]
+196. ambiguous([[4]-[]])
+   => clear(drop_first)
+197. candidates([[3,4]-[4,3]])
+   => [reverse]
+198. split([reverse,msort,dedupe], [])
+   => [[]-[dedupe,msort,reverse]]
+199. ambiguous([[2]-[2]])
+   => ask([1,1,2])
+200. candidates([[2,4,5,5]-[2,4,5],[3]-[3]])
+   => [dedupe]
