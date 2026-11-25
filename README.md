@@ -7,7 +7,7 @@ find specs that more than one algorithm could satisfy, and ask the question that
 ```prolog
 ?- use_module(prolog/specambig).
 ?- candidates([[2,1]-[1,2]], C).            % C = [reverse, msort, dedupe]: all three pass
-?- ambiguous([[2,1]-[1,2]], Q).             % Q = ask([1,1]): reverse, msort and dedupe all differ there
+?- ambiguous([[2,1]-[1,2]], Q).             % Q = ask([1,1,2]): reverse gives [2,1,1], msort [1,1,2], dedupe [1,2]
 ?- ambiguous([[2,1]-[1,2], [1,1]-[1,1]], Q).  % Q = ask(...) or clear(F)
 ```
 
